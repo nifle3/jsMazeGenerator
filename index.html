@@ -3,6 +3,10 @@
     <head>
         <title>Maze generator</title>
         <script src="./dist/index.js" type="module"></script>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+        >
     </head>
     <body>
         <div>
@@ -13,7 +17,13 @@
             <label for="colcount">Col count of maze</label>
             <input type="number" id="colcount" min="3" max="100" value="10"/>
         </div>
+        <div>
+            <label for="algo-select">Algorithm for generate</label>
+            <select id="algo-select"></select>
+        </div>
         <button id="generate-button">Generate</button>
+        <button id="import-button">Import to file</button>
+        <button id="export-button">Export from file</button>
         <canvas id="canvas-maze"></canvas>
     </body>
 </html>
