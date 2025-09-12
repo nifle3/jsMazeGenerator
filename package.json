@@ -1,0 +1,15 @@
+{
+  "name": "jsMazeGenerator",
+  "version": "1.0.0",
+  "description": "Static app for generate maze",
+  "scripts": {
+    "dev": "node ./build/build.dev.mjs",
+    "build": "node ./build/build.mjs"
+  },
+  "author": "nifle3",
+  "license": "MIT",
+  "packageManager": "pnpm@10.15.0",
+  "dependencies": {
+    "esbuild": "^0.25.9"
+  }
+}
