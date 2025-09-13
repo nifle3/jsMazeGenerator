@@ -20,18 +20,6 @@
         </style>
     </head>
     <body>
-        <div>
-            <label for="rowcount">Row count of maze</label>
-            <input type="number" id="rowcount" min="3" max="20" value="10"/>
-        </div>
-        <div>
-            <label for="colcount">Col count of maze</label>
-            <input type="number" id="colcount" min="3" max="20" value="10"/>
-        </div>
-        <div>
-            <label for="algo-select">Algorithm for generate</label>
-            <select id="algo-select"></select>
-        </div>
         <div class="help-div">
             <h3>
                 Help
@@ -39,7 +27,21 @@
             <span>Red circle - end of maze</span>
             <span>Green circle - start of maze</span>
         </div>
-        <button id="generate-button">Generate</button>
+        <form id="form">
+            <div>
+                <label for="rowcount">Row count of maze</label>
+                <input type="number" id="rowcount" min="3" max="20" value="10"/>
+            </div>
+            <div>
+                <label for="colcount">Col count of maze</label>
+                <input type="number" id="colcount" min="3" max="20" value="10"/>
+            </div>
+            <div>
+                <label for="algo-select">Algorithm for generate</label>
+                <select id="algo-select"></select>
+            </div>
+            <button id="generate-button" type="submit">Generate</button>
+        </form>
         <canvas id="canvas-maze" class="canvas-maze" width="0" height="0"></canvas>
     </body>
 </html>

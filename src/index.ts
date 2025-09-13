@@ -12,8 +12,9 @@ function getObjectBySelector<T extends HTMLElement>(selector: string): T {
   return element as T;
 }
 
-function onClickGenerateButton(event): void {
+function onFormSubmit(event: Event): void {
   console.debug("click on generate button");
+  event.preventDefault();
 
   const rowCount = rowCountInput.value as unknown as number;
   const colCount = colCountInput.value as unknown as number;
@@ -125,7 +126,7 @@ const widthPerCol = 50;
 const rowCountInput = getObjectBySelector<HTMLInputElement>("#rowcount");
 const colCountInput = getObjectBySelector<HTMLInputElement>("#colcount");
 const algoSelect = getObjectBySelector<HTMLSelectElement>("#algo-select");
-const generateButton = getObjectBySelector<HTMLButtonElement>("#generate-button");
+const form = getObjectBySelector<HTMLFormElement>("#form");
 const mazeCanvas = getObjectBySelector<HTMLCanvasElement>("#canvas-maze");
 const context = mazeCanvas.getContext("2d");
 if (!context) {
@@ -137,4 +138,4 @@ for (const algoName of Object.keys(generators)) {
   algoSelect.add(option);
 }
 
-generateButton.addEventListener("click", onClickGenerateButton);
+form.addEventListener("submit", onFormSubmit);
