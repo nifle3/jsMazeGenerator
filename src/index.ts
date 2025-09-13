@@ -62,12 +62,12 @@ function printOnCanvas(field: MazeField, col: number, row: number): void {
       const rightDownAngleX = xStartCell + widthPerCol;
       const rightDownAngleY = yStartCell + heightPerRow;
 
-      if (j+1 < field[i].length && field[i][j+1] != PossibleWay.TOP) {
+      if (field[i][j] != PossibleWay.TOP) {
         drawLine(xStartCell, yStartCell, rightUpperAngleX, rightUpperAngleY);
-      }
-
-      if (i - 1 > 0 && field[i-1][j] != PossibleWay.RIGHT) {
+      } else if (field[i][j] != PossibleWay.RIGHT) {
         drawLine(rightUpperAngleX, rightUpperAngleY, rightDownAngleX, rightDownAngleY);
+      } else {
+        console.error(`field ${i}, ${j} is None`)
       }
     }
   }

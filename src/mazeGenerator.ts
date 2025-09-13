@@ -3,6 +3,7 @@ import { getRandomNumber } from "./utils.ts";
 
 export const generators: Record<string, GeneratorFunc> = {
   "Binary tree": binaryTreeAlgorithm,
+  "Sidewinder": sidewinder,
 };
 
 function binaryTreeAlgorithm(row: number, col: number): MazeField {
@@ -13,11 +14,11 @@ function binaryTreeAlgorithm(row: number, col: number): MazeField {
     for (let j = 0; j < field[i].length; j++) {
       let possibleWay: PossibleWay[] = [];
 
-      if (i > 0) {
+      if (i-1 >= 0) {
         possibleWay.push(PossibleWay.TOP);
       }
 
-      if (j < field[i].length) {
+      if (j+1 < field[i].length) {
         possibleWay.push(PossibleWay.RIGHT)
       }
 
@@ -31,6 +32,12 @@ function binaryTreeAlgorithm(row: number, col: number): MazeField {
   }
 
   console.debug("Field", field);
+
+  return field;
+}
+
+function sidewinder(row: number, col: number): MazeField {
+  const field = createMazeField(row, col);
 
   return field;
 }
