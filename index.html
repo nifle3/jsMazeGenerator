@@ -13,6 +13,10 @@
                 display: block;
                 margin-top: 1rem;
             }
+            .help-div {
+                display: flex;
+                flex-direction: column;
+            }
         </style>
     </head>
     <body>
@@ -27,6 +31,13 @@
         <div>
             <label for="algo-select">Algorithm for generate</label>
             <select id="algo-select"></select>
+        </div>
+        <div class="help-div">
+            <h3>
+                Help
+            </h3>
+            <span>Red circle - end of maze</span>
+            <span>Green circle - start of maze</span>
         </div>
         <button id="generate-button">Generate</button>
         <canvas id="canvas-maze" class="canvas-maze" width="0" height="0"></canvas>

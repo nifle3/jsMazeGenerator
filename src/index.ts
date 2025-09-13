@@ -19,7 +19,7 @@ function onClickGenerateButton(event): void {
   const colCount = colCountInput.value as unknown as number;
   const selectOption = algoSelect.value;
 
-  if (rowCount < 3 || rowCount > 20 || colCount < 3 || rowCount > 20) {
+  if (rowCount < 3 || rowCount > 20 || colCount < 3 || colCount > 20) {
     throw new Error("Min value of row count and col count is 3. Max value is 20");
   }
 
@@ -31,8 +31,8 @@ function onClickGenerateButton(event): void {
   }
 
   printOnCanvas(
-      generator(rowCount, colCount),
-      rowCount, colCount
+    generator(rowCount, colCount),
+    colCount, rowCount
   );
 
   return;
@@ -47,6 +47,9 @@ function printOnCanvas(field: MazeField, col: number, row: number): void {
   mazeCanvas.height = height;
 
   console.debug("set canvas shape width: ", width, "height", height);
+
+  drawStart();
+  drawEnd(col, row);
 
   for (let i = 0; i < field.length; i++) {
     for (let j = 0; j < field[i].length; j++) {
@@ -71,24 +74,49 @@ function printOnCanvas(field: MazeField, col: number, row: number): void {
     console.debug("Stop paint");
 }
 
-function drawStart() {
+function drawStart(): void {
+  const x = widthPerCol / 2;
+  const y = heightPerRow / 2;
+  const radius = calcualteRadiusOfCircleInCell();
 
+  drawCircle("rgb(0, 255, 0)", x, y, radius);
 }
 
-function drawEnd() {
+function drawEnd(colCount: number, rowCount: number) {
+  const x = ((colCount - 1) * widthPerCol) + (widthPerCol / 2);
+  const y = ((rowCount - 1) * heightPerRow) + (heightPerRow / 2);
+  const radius = calcualteRadiusOfCircleInCell();
 
+  drawCircle("rgb(255, 0, 0)", x, y, radius);
+}
+
+function calcualteRadiusOfCircleInCell(): number {
+  return Math.min(widthPerCol / 2, heightPerRow / 2)
+}
+
+function drawCircle(color: string, xCenter: number, yCenter: number, radius: number) {
+  const previousColor = context!.fillStyle;
+  context!.fillStyle = color;
+  console.debug("(xCenter, yCenter, radius)", xCenter, yCenter, radius);
+
+  context!.beginPath();
+
+  context!.arc(xCenter, yCenter, radius, 0, Math.PI * 2, true);
+
+  context!.fill();
+  context!.closePath();
 }
 
 function drawLine(xFrom: number, yFrom: number, xTo: number, yTo: number): void {
   console.debug(`from (${xFrom}, ${yFrom}), to (${xTo}, ${yTo})`)
 
-  context?.beginPath();
+  context!.beginPath();
 
-  context?.moveTo(xFrom, yFrom);
-  context?.lineTo(xTo, yTo);
-  context?.stroke();
+  context!.moveTo(xFrom, yFrom);
+  context!.lineTo(xTo, yTo);
+  context!.stroke();
 
-  context?.closePath();
+  context!.closePath();
 }
 
 const heightPerRow = 50;
