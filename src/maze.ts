@@ -1,5 +1,5 @@
 export enum PossibleWay {
-  NONE, RIGHT, TOP
+  NONE, RIGHT, TOP, RIGHT_AND_TOP
 }
 
 export type MazeField = PossibleWay[][];

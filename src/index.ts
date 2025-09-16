@@ -16,13 +16,9 @@ function onFormSubmit(event: Event): void {
   console.debug("click on generate button");
   event.preventDefault();
 
-  const rowCount = rowCountInput.value as unknown as number;
-  const colCount = colCountInput.value as unknown as number;
+  const rowCount = rowCountInput.valueAsNumber;
+  const colCount = colCountInput.valueAsNumber;
   const selectOption = algoSelect.value;
-
-  if (rowCount < 3 || rowCount > 20 || colCount < 3 || colCount > 20) {
-    throw new Error("Min value of row count and col count is 3. Max value is 20");
-  }
 
   console.debug("rowCount, colCount algoName", rowCount, colCount, selectOption);
 
@@ -62,12 +58,25 @@ function printOnCanvas(field: MazeField, col: number, row: number): void {
       const rightDownAngleX = xStartCell + widthPerCol;
       const rightDownAngleY = yStartCell + heightPerRow;
 
-      if (field[i][j] != PossibleWay.TOP) {
+      if (field[i][j] == PossibleWay.NONE) {
+        if (i != 0) {
+          drawLine(xStartCell, yStartCell, rightUpperAngleX, rightUpperAngleY);
+        }
+        if (j != field[i].length-1) {
+          drawLine(rightUpperAngleX, rightUpperAngleY, rightDownAngleX, rightDownAngleY);
+        }
+
+        continue
+      }
+
+      if (field[i][j] == PossibleWay.RIGHT_AND_TOP) {
+        continue;
+      }
+
+      if (field[i][j] != PossibleWay.TOP && i != 0) {
         drawLine(xStartCell, yStartCell, rightUpperAngleX, rightUpperAngleY);
-      } else if (field[i][j] != PossibleWay.RIGHT) {
+      } else if (field[i][j] != PossibleWay.RIGHT && j != field[i].length-1) {
         drawLine(rightUpperAngleX, rightUpperAngleY, rightDownAngleX, rightDownAngleY);
-      } else {
-        console.error(`field ${i}, ${j} is None`)
       }
     }
   }

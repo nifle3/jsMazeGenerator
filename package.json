@@ -11,5 +11,8 @@
   "packageManager": "pnpm@10.15.0",
   "dependencies": {
     "esbuild": "^0.25.9"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.4"
   }
 }
