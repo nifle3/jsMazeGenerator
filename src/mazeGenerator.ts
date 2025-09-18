@@ -44,24 +44,30 @@ function sidewinder(row: number, col: number): MazeField {
   }
 
   for (let i = 1; i < field.length; i++) {
-    for (
-      let j = 0, indexEndOfSet = getRandomNumberWithMin(j, field[i].length);
-      j < field[i].length;
-      j += indexEndOfSet, indexEndOfSet = getRandomNumberWithMin(j, field[i].length)
-    ) {
+    let set: number[] = [];
 
-      for (let k = j; k < indexEndOfSet; k++) {
-        field[i][k] = PossibleWay.RIGHT;
-      }
+    for (let j = 0; j < field[i].length; j++) {
+      set.push(j);
+      if (sidewinderIsSetEnd()) {
+        const indexInSetToGetTopWay = getRandomNumber(set.length - 1);
+        const indexToGetTopWay = set[indexInSetToGetTopWay];
 
-      const indexCellWithWayToTop = getRandomNumberWithMin(j, indexEndOfSet);
-      if (field[i][indexCellWithWayToTop] == PossibleWay.RIGHT) {
-        field[i][indexCellWithWayToTop] = PossibleWay.RIGHT_AND_TOP;
+        if (field[i][indexToGetTopWay] == PossibleWay.RIGHT) {
+          field[i][indexToGetTopWay] = PossibleWay.RIGHT_AND_TOP;
+        } else {
+          field[i][indexToGetTopWay] = PossibleWay.TOP;
+        }
+
+        set = [];
       } else {
-        field[i][indexCellWithWayToTop] = PossibleWay.TOP;
+        field[i][j] = PossibleWay.RIGHT;
       }
     }
   }
 
   return field;
+}
+
+function sidewinderIsSetEnd(): boolean {
+  return (getRandomNumber(100) % 2) == 0;
 }
