@@ -48,7 +48,7 @@ function sidewinder(row: number, col: number): MazeField {
 
     for (let j = 0; j < field[i].length; j++) {
       set.push(j);
-      if (sidewinderIsSetEnd()) {
+      if (sidewinderIsSetEnd() ||(j == (field[i].length-1))) {
         const indexInSetToGetTopWay = getRandomNumber(set.length - 1);
         const indexToGetTopWay = set[indexInSetToGetTopWay];
 
